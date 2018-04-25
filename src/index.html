@@ -1,0 +1,68 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Mileev Anton</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="icon" href="img/brainstorming.ico" type="images/x-ico">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<div  class="task-container">
+    <div class="task-container__block">
+        <form name="fname">
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" placeholder="Enter Your Name" name="name">
+                <span id="error_field"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Secondname</label>
+                <input type="text" placeholder="Enter Your Secondname" name="secondname">
+                <span id="error_field-sn"></span>
+            </div>
+
+            <div class="form-group">
+                <label class="gender">Gender</label>
+                <select name="gender" id="">
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="text" placeholder="Enter Your password" name="pass">
+                <span id="error_pass"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Confirm Password</label>
+                <input type="text" placeholder="Confirm Password" name="passcon">
+                <span id="error_cp"></span>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" placeholder="Email" name="email">
+                <span id="error_email"></span>
+            </div>
+
+            <div class="form-group-checkbox">
+                <input type="checkbox" name="checkbox"><label>I accept the terms</label>
+                <span id="error_check"></span>
+            </div>
+
+
+            <div class="button-block">
+                <button type="button" value="Register" class="btn" name="submit" id="click_button">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="js/jquery.backgroundvideo.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
