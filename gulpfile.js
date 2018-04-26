@@ -70,7 +70,7 @@ gulp.task('js:build', function () {
     gulp.src(path.src.js)
     .pipe(sourcemaps.init())
     .pipe(rigger())
-    .pipe(uglify())
+ //   .pipe(uglify())
     .pipe(gulp.dest(path.build.js))
     .pipe(sourcemaps.write())
     .pipe(reload({stream: true}));

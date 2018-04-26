@@ -13,7 +13,7 @@ $(document).ready(function() {
         "autoplay": true,
         "loop": true
     });
-});
+
 
 /*************************username*************************/
 var userName = function userName() {
@@ -154,7 +154,24 @@ var checbox = function checbox() {
     }
 };
 
-document.querySelector(".btn").onclick = function formValidation() {
+$(".btn").click(function() {
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://codeit.pro/codeitCandidates/serverFrontendTest/company/getList", false);
+    xhr.send();
+
+    var dataCompanys;
+    dataCompanys = JSON.parse(xhr.responseText);
+    window.location.href = "company.html";
+    setTimeout(document.querySelector(".total").innerHTML = dataCompanys.list.length, 3000);
+    //document.querySelector(".total").innerHTML = dataCompanys.list.length;
+
+
+    //document. querySelector(".total").innerHTML = typeof dataTotal;
+
+
+
+
         var arr = [];
         var objSend = new Object();
         arr.push(userName());
@@ -169,11 +186,35 @@ document.querySelector(".btn").onclick = function formValidation() {
                 data: $("form").serialize()
             }
             $.post(objSend.url, objSend.data, responseServer);
-            console.log(objSend.data);
         }
-}
+})
 
 function responseServer(resp){
-    alert(resp.message);
+    if(resp.status !== "OK"){
+        alert(resp.message);
+    } else{
+        // var xhr = new XMLHttpRequest();
+        // xhr.open("GET", "http://codeit.pro/codeitCandidates/serverFrontendTest/company/getList", true);
+        // xhr.send();
+        // window.location.href = "company.html";
+        // var dataTotal;
+        // dataTotal = JSON.parse(xhr.responseText);
+        // document. querySelector(".total").innerHTML = typeof dataTotal;
 
+
+    }
 }
+
+    /*************************loader*************************/
+    alert("sdfsdfsdfsdf");
+    $(".result").circularProgress({
+        width: "200px",
+        height: "200px",
+        line_width: 18,
+        color: "red",
+        starting_position: 25, // 12.00 o' clock position, 25 stands for 3.00 o'clock (clock-wise)
+        percent: 0, // percent starts from
+        percentage: true,
+    }).circularProgress('animate', 100, 3000);
+
+});

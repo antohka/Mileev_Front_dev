@@ -1,0 +1,52 @@
+@import 'fonts.scss';
+@import 'variable.scss';
+@import 'base.scss';
+
+body{
+    padding: 10px;
+}
+.flex{
+    display: flex;
+    justify-content: space-between;
+    margin: 3px auto;
+}
+
+.total,
+.list,
+.partners,
+.location,
+.news,
+.add {
+    padding: 5px;
+    width: 50%;
+    height: 300px;
+    h3 {
+        font-size: 17px;
+        font-weight: 600;
+        text-transform: uppercase;
+        line-height: 1.5em;
+        color: #fff;
+        text-align: center;
+        background: rgba(0, 0, 0, .4);
+    }
+    .result{
+        position: relative;
+        margin: 30px auto;
+        font-size: 30px;
+        font-weight: 700;
+        text-align: center;
+    }
+}
+
+.total,
+.partners,
+.news {
+    margin-right: 3px;
+}
+//*****loader******//
+.progress-percentage{
+    margin: auto;
+    font-size: 30px;
+    font-weight: 600;
+    color: #fff;
+}
