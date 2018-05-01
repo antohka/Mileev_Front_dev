@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width">
     <link rel="icon" href="img/brainstorming.ico" type="images/x-ico">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/style_companys.css">
 </head>
@@ -12,31 +13,43 @@
     <div  class="task-container flex">
         <div class="task-container__block total">
             <h3>Total</h3>
-            <div class="result"></div>
+            <div class="preloader"></div>
+            <div class="result-total"></div>
         </div>
         <div class="task-container__block list">
             <h3>Company</h3>
+            <div class="preloader"></div>
+            <div class="result-companies"></div>
         </div>
     </div>
     <div  class="task-container flex">
         <div class="task-container__block partners">
             <h3>Partners</h3>
+            <div class="preloader"></div>
         </div>
         <div class="task-container__block location">
             <h3>Location</h3>
+            <div class="preloader"></div>
+            <div id="piechart_3d"></div>
         </div>
     </div>
     <div  class="task-container flex">
         <div class="task-container__block partners news">
             <h3>News</h3>
+            <div class="preloader"></div>
         </div>
         <div class="task-container__block add">
             <h3>Add</h3>
+            <div class="preloader"></div>
         </div>
+    </div>
+    <div class="button-block">
+        <button type="button" value="Register" class="btn" name="submit" id="click_button">Submit</button>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="js/jquery.backgroundvideo.min.js"></script>
-    <script src="js/plugin.js"></script>
+
     <script src="js/main.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
