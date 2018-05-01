@@ -21,4 +21,13 @@ $(document).ready(function() {
 
     document.querySelector(".result-total").innerHTML = data.list.length;
 
+
+
+
+
+
+
+
+
+
 }
