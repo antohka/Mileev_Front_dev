@@ -33,7 +33,7 @@ $(document).ready(function() {
             field.style.color = 'green';
             return true;
         }
-    };
+    }
 /*************************secondname*************************/
     var userSecondname = function userSecondname() {
         var reg = /^[a-zA-Z]+$/;
@@ -54,7 +54,7 @@ $(document).ready(function() {
             field.style.color = 'green';
             return true;
         }
-    };
+    }
 /*************************password*************************/
     var pattern1 = /[0-9]/;
     var pattern2 = /[a-z]/;
@@ -93,7 +93,7 @@ $(document).ready(function() {
             error.style.color = 'green';
             return true;
         }
-    };
+    }
 /*************************confirm*************************/
     var confirm = function confirm() {
         var pwd = document.fname.pass.value;
@@ -112,7 +112,7 @@ $(document).ready(function() {
             error.style.color = 'green';
             return true;
         }
-    };
+    }
 /*************************Email*************************/
     var email = function email() {
 
@@ -134,7 +134,7 @@ $(document).ready(function() {
             error.style.color = 'green';
             return true;
         }
-    };
+    }
 /*************************checkbox*************************/
     var checbox = function checbox() {
         var error = document.getElementById("error_check");
@@ -147,57 +147,37 @@ $(document).ready(function() {
             error.style.color = 'green';
             return true;
         }
-    };
-
-
-    document.getElementById("click_button").onclick = function() {
-
-            responseServer();
-
-            // var arr = [];
-            // var objSend = new Object();
-            // arr.push(userName());
-            // arr.push(userSecondname());
-            // arr.push(userPassword());
-            // arr.push(confirm());
-            // arr.push(email());
-            // arr.push(checbox());
-            // if(arr[0] && arr[1] && arr[2] && arr[3] && arr[4]) {
-            //     objSend = {
-            //         url: "http://codeit.pro/codeitCandidates/serverFrontendTest/user/registration",
-            //         data: $("form").serialize()
-            //     }
-            //     $.post(objSend.url, objSend.data, responseServer);
-            // }
     }
 
-    function responseServer(){
-        // if(resp.status !== "OK"){
-        //     alert(resp.message);
-        // } else{
-        window.location.href = "company.html";
+    $(".btn").click(function() {
+        var arr = [];
+        var objSend = new Object();
+        arr.push(userName());
+        arr.push(userSecondname());
+        arr.push(userPassword());
+        arr.push(confirm());
+        arr.push(email());
+        arr.push(checbox());
+        if(arr[0] && arr[1] && arr[2] && arr[3] && arr[4]) {
+            objSend = {
+                url: "http://codeit.pro/codeitCandidates/serverFrontendTest/user/registration",
+                data: $("form").serialize()
+            }
+            $.post(objSend.url, objSend.data, responseServer);
+        }
+    });
 
-
-
-
-
-
-
-
-
-       //
-       //
-       //      var dataNews;
-       //
-       //      dataNews = JSON.parse(xhrNews.responseText);
-       //      if (dataNews.status == "OK") {
-       //          alert("OK");
-       //      }
-       // }
+    function responseServer(resp){
+        if(resp.status !== "OK"){
+            alert(resp.message);
+        } else{
+            window.location.href = "company.html";
+            var dataNews;
+            dataNews = JSON.parse(xhrNews.responseText);
+            if (dataNews.status == "OK") {
+                alert("OK");
+            }
+       }
     }
-
-
-
-
 });
 
