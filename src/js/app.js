@@ -16,19 +16,28 @@ $(document).ready(function() {
             data = JSON.parse(xhr.responseText);
             var dataNews;
             dataNews = JSON.parse(xhrNews.responseText);
-            $(".result-total").text(data.list.length + " companies");
-            $(".preloader").removeClass("preloader");
-            $(".preloader").css({"opacity": "0", "transition": "opacity 1s linear"});
-            $(".result-total").css({"opacity": "1", "transition": "opacity 3s linear"});
-            $(".result-companies").css({"opacity": "1", "transition": "opacity 3s linear"});
-            $(".company-partners").css({"opacity": "1", "transition": "opacity 3s linear"});
-            $("form").css({"opacity": "1", "transition": "opacity 3s linear"});
-            $("#piechart_3d").css({"opacity": "1", "transition": "opacity 3s linear"});
-            $(".news-companies").css({"opacity": "1", "transition": "opacity 3s linear"});
-            $(".add a").css({"opacity": "1", "transition": "opacity 3s linear"});
+            var resultTotal = $(".result-total");
+            var preloader = $(".preloader");
+            var resultCompanies = $(".result-companies");
+            var companyPartners = $(".company-partners");
+            var form = $("form");
+            var diagram = $("#piechart_3d");
+            var newsCompanies = $(".news-companies");
+            var addTagA = $(".add a");
+
+            resultTotal.text(data.list.length + " companies");
+            preloader.removeClass("preloader");
+            preloader.css({"opacity": "0", "transition": "opacity 1s linear"});
+            resultTotal.css({"opacity": "1", "transition": "opacity 3s linear"});
+            resultCompanies.css({"opacity": "1", "transition": "opacity 3s linear"});
+            companyPartners.css({"opacity": "1", "transition": "opacity 3s linear"});
+            form.css({"opacity": "1", "transition": "opacity 3s linear"});
+            diagram.css({"opacity": "1", "transition": "opacity 3s linear"});
+            newsCompanies.css({"opacity": "1", "transition": "opacity 3s linear"});
+            addTagA.css({"opacity": "1", "transition": "opacity 3s linear"});
 
             var ul = document.createElement('ul');
-            document.querySelector(".result-companies").appendChild(ul);
+            resultCompanies.appendChild(ul);
 
             for (var i = 0; i < data.list.length; i++) {
                 addLi(i);
@@ -37,6 +46,7 @@ $(document).ready(function() {
             function addLi(num) {
                 var a = document.createElement('a');
                 a.innerHTML = data.list[num].name;
+                a.setAttribute("data", num);
                 var li = document.createElement('li');
                 li.appendChild(a);
                 var parent = document.body.getElementsByTagName('ul')[0];
@@ -99,7 +109,7 @@ $(document).ready(function() {
                 var companyName = this.innerHTML;
                 var str = " ";
                 var helpArr = [];
-                $(".company-partners").text(function () {
+                companyPartners.text(function () {
                     for (var i = 0; i < data.list.length; i++) {
                         if (data.list[i].name === companyName) {
                             helpArr = data.list[i].partners.sort(function (a, b) {
@@ -128,9 +138,9 @@ $(document).ready(function() {
             }
 
             var ulNews = document.createElement('ul');
-            document.querySelector(".news-companies").appendChild(ulNews);
+            newsCompanies.appendChild(ulNews);
             var link = document.createElement('a');
-            document.querySelector(".add").appendChild(link);
+            $(".add").appendChild(link);
             link.innerHTML = dataNews.list[0].link;
             link.setAttribute("href", "https://codeit.us/");
             link.setAttribute("alt", "photo");

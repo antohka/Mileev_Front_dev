@@ -1,1 +1,172 @@
-$(document).ready(function(){var e=new XMLHttpRequest;e.open("GET","http://codeit.pro/codeitCandidates/serverFrontendTest/company/getList",!0),e.send();var t=new XMLHttpRequest;t.open("GET","http://codeit.pro/codeitCandidates/serverFrontendTest/news/getList",!0),t.send();var n=setInterval(function(){if(4===e.readyState&&4===t.readyState){var a,r;clearInterval(n),a=JSON.parse(e.responseText),r=JSON.parse(t.responseText),$(".result-total").text(a.list.length+" companies"),$(".preloader").removeClass("preloader"),$(".preloader").css({opacity:"0",transition:"opacity 1s linear"}),$(".result-total").css({opacity:"1",transition:"opacity 3s linear"}),$(".result-companies").css({opacity:"1",transition:"opacity 3s linear"}),$(".company-partners").css({opacity:"1",transition:"opacity 3s linear"}),$("form").css({opacity:"1",transition:"opacity 3s linear"}),$("#piechart_3d").css({opacity:"1",transition:"opacity 3s linear"}),$(".news-companies").css({opacity:"1",transition:"opacity 3s linear"}),$(".add a").css({opacity:"1",transition:"opacity 3s linear"});var i=document.createElement("ul");document.querySelector(".result-companies").appendChild(i);for(var o=0;o<a.list.length;o++)l(o);function l(e){var t=document.createElement("a");t.innerHTML=a.list[e].name;var n=document.createElement("li");n.appendChild(t),document.body.getElementsByTagName("ul")[0].appendChild(n)}var s=[];s[0]=a.list[70].location.name;var c=!0;for(o=0;o<a.list.length;o++){for(var d=0;d<s.length;d++)a.list[o].location.name===s[d]&&(c=!1);c&&s.push(a.list[o].location.name)}for(var p=[],u=0;u<s.length;u++){p[u]=0;for(o=0;o<a.list.length;o++)s[u]===a.list[o].location.name&&(p[u]+=1)}google.charts.load("current",{packages:["corechart"]}),google.charts.setOnLoadCallback(function(){for(var e=[],t=0;t<s.length+1;t++)e[t]=[];e[0]=["Task","H"];for(var n=1;n<e.length;n++)e[n][0]=s[n-1],e[n][1]=p[n-1];var a=google.visualization.arrayToDataTable(e);new google.visualization.PieChart(document.getElementById("piechart_3d")).draw(a,{title:"",width:320,height:250,backgroundColor:"transparent",stroke:"white",is3D:!0})}),$("ul li a").click(function(){var e=$("input[name=sort]:checked").val(),t=this.innerHTML,n=" ",r=[];$(".company-partners").text(function(){for(var i=0;i<a.list.length;i++)if(a.list[i].name===t){r=a.list[i].partners.sort(function(e,t){return e.value-t.value}),"growth"===e&&r.reverse();for(var o=0;o<r.length;o++)n+=r[o].name+": "+r[o].value+"%; ";return n}})});var m=document.createElement("ul");document.querySelector(".news-companies").appendChild(m);var h=document.createElement("a");document.querySelector(".add").appendChild(h),h.innerHTML=r.list[0].link,h.setAttribute("href","https://codeit.us/"),h.setAttribute("alt","photo");for(o=0;o<r.list.length;o++)g(o);function g(e){var t,n,a,i,l=document.createElement("li"),s=document.createElement("a"),c=document.createElement("img"),d=document.createElement("span"),p=document.createElement("span"),u=document.createElement("p");document.body.getElementsByTagName("ul")[1].appendChild(l),l.appendChild(s),l.appendChild(c),l.appendChild(d),l.appendChild(p),l.appendChild(u),s.innerHTML="Title "+(o+1),c.src=r.list[o].img,d.innerHTML=r.list[o].author,p.innerHTML=(t=r.list[o].date,n=new Date(1e3*t),a=n.getFullYear(),i=n.getMonth()+1<10?"0"+(n.getMonth()+1):n.getMonth()+1,n.getDate()+"."+i+"."+a),u.innerHTML=r.list[o].description}}}, 2000)});
+
+$(document).ready(function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "http://codeit.pro/codeitCandidates/serverFrontendTest/company/getList", true);
+    xhr.send();
+
+
+    var xhrNews = new XMLHttpRequest();
+    xhrNews.open("GET", "http://codeit.pro/codeitCandidates/serverFrontendTest/news/getList", true);
+    xhrNews.send();
+
+    var timer = setInterval(function () {
+        if(xhr.readyState === 4 && xhrNews.readyState === 4) {
+            clearInterval(timer);
+            var data;
+            data = JSON.parse(xhr.responseText);
+            var dataNews;
+            dataNews = JSON.parse(xhrNews.responseText);
+            var resultTotal = $(".result-total");
+            var preloader = $(".preloader");
+            var resultCompanies = $(".result-companies");
+            var companyPartners = $(".company-partners");
+            var form = $("form");
+            var diagram = $("#piechart_3d");
+            var newsCompanies = $(".news-companies");
+            var addTagA = $(".add a");
+
+            resultTotal.text(data.list.length + " companies");
+            preloader.removeClass("preloader");
+            preloader.css({"opacity": "0", "transition": "opacity 1s linear"});
+            resultTotal.css({"opacity": "1", "transition": "opacity 3s linear"});
+            resultCompanies.css({"opacity": "1", "transition": "opacity 3s linear"});
+            companyPartners.css({"opacity": "1", "transition": "opacity 3s linear"});
+            form.css({"opacity": "1", "transition": "opacity 3s linear"});
+            diagram.css({"opacity": "1", "transition": "opacity 3s linear"});
+            newsCompanies.css({"opacity": "1", "transition": "opacity 3s linear"});
+            addTagA.css({"opacity": "1", "transition": "opacity 3s linear"});
+
+            var ul = document.createElement('ul');
+            resultCompanies.append(ul);
+
+            for (var i = 0; i < data.list.length; i++) {
+                addLi(i);
+            }
+
+            function addLi(num) {
+                var a = document.createElement('a');
+                a.innerHTML = data.list[num].name;
+                a.setAttribute("data", num);
+                var li = document.createElement('li');
+                li.appendChild(a);
+                var parent = document.body.getElementsByTagName('ul')[0];
+                parent.appendChild(li);
+            }
+
+    //--------------calc data---------------------------
+            var arrLocation = [];
+            arrLocation[0] = data.list[70].location.name;
+            var flag = true;
+            for (var i = 0; i < data.list.length; i++) {
+                for (var j = 0; j < arrLocation.length; j++) {
+                    if (data.list[i].location.name === arrLocation[j]) {
+                        flag = false;
+                    }
+                }
+                if (flag) {
+                    arrLocation.push(data.list[i].location.name);
+                }
+            }
+            var arrLocationCalc = [];
+            for (var k = 0; k < arrLocation.length; k++) {
+                arrLocationCalc[k] = 0;
+                for (var i = 0; i < data.list.length; i++) {
+                    if (arrLocation[k] === data.list[i].location.name) {
+                        arrLocationCalc[k] += 1;
+                    }
+                }
+            }
+            //---------charts------------------
+            google.charts.load("current", {packages: ["corechart"]});
+            google.charts.setOnLoadCallback(drawChart);
+
+            function drawChart() {
+                var arrTask = [];
+                for (var j = 0; j < arrLocation.length + 1; j++) {
+                    arrTask[j] = [];
+                }
+                arrTask[0] = ['Task', 'H'];
+                for (var h = 1; h < arrTask.length; h++) {
+                    arrTask[h][0] = arrLocation[h - 1];
+                    arrTask[h][1] = arrLocationCalc[h - 1];
+                }
+                var data = google.visualization.arrayToDataTable(arrTask);
+                var options = {
+                    title: '',
+                    'width': 320,
+                    'height': 250,
+                    backgroundColor: 'transparent',
+                    stroke: "white",
+                    is3D: true,
+                };
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                chart.draw(data, options);
+            }
+
+    //------------------------click companies-----------------------------
+            $("ul li a").click(function () {
+                var radio = $('input[name=sort]:checked').val();
+                var companyName = this.innerHTML;
+                var attrA = this.getAttribute('data');
+                var str = " ";
+                var helpArr = [];
+                companyPartners.text(function () {
+                    helpArr = data.list[parseInt(attrA)].partners.sort(function (a, b) {
+                        return a.value - b.value;
+                        })
+                    if (radio === "waning") {
+                        helpArr.reverse();
+                        }
+                        for (var j = 0; j < helpArr.length; j++) {
+                        str += helpArr[j].name + ": " + helpArr[j].value + "%; ";
+                    }
+                    return str;
+                })
+            });
+
+    //-----------------------------news------------------------------
+            function timeConverter(UNIX_timestamp) {
+                var a = new Date(UNIX_timestamp * 1000);
+                var year = a.getFullYear();
+                var month = ((a.getMonth() + 1) < 10) ? "0" + (a.getMonth() + 1) : (a.getMonth() + 1);
+                var date = a.getDate();
+                var time = date + '.' + month + '.' + year;
+                return time;
+            }
+
+            var ulNews = document.createElement('ul');
+            newsCompanies.append(ulNews);
+            var link = document.createElement('a');
+            $(".add").append(link);
+            link.innerHTML = dataNews.list[0].link;
+            link.setAttribute("href", "https://codeit.us/");
+            link.setAttribute("alt", "photo");
+
+            for (var i = 0; i < dataNews.list.length; i++) {
+                addLiNews(i);
+            }
+
+            function addLiNews(num) {
+                var li = document.createElement('li');
+                var a = document.createElement('a');
+                var img = document.createElement('img');
+                var divAuthor = document.createElement('span');
+                var divDate = document.createElement('span');
+                var pDesc = document.createElement('p');
+                var parent = document.body.getElementsByTagName('ul')[1];
+                parent.appendChild(li);
+
+                li.appendChild(a);
+                li.appendChild(img);
+                li.appendChild(divAuthor);
+                li.appendChild(divDate);
+                li.appendChild(pDesc);
+                a.innerHTML = "Title " + (i + 1);
+                img.src = dataNews.list[i].img;
+                divAuthor.innerHTML = dataNews.list[i].author;
+                divDate.innerHTML = timeConverter(dataNews.list[i].date);
+                pDesc.innerHTML = dataNews.list[i].description;
+            }
+        }
+    }, 2000);
+});

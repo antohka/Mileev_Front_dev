@@ -6,7 +6,7 @@ $(document).ready(function() {
         "align": "centerXY",
         "width": 1280,
         "height": 720,
-        "path": "../dist/video/",
+        "path": "../video/",
         "filename": "Film-set",
         "types": ["mp4","ogg","webm"],
         "preload": true,
