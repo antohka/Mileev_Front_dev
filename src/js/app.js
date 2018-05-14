@@ -23,7 +23,13 @@ $(document).ready(function() {
             var form = $("form");
             var diagram = $("#piechart_3d");
             var newsCompanies = $(".news-companies");
-            var addTagA = $(".add a");
+            var addBlock = $(".add");
+
+            var adress = document.createElement('a');
+            addBlock.append(adress);
+            adress.innerHTML = "my CV";
+            adress.setAttribute("href", "https://hh.ru/resume/a633e285ff050700d30039ed1f72386f523849");
+            var add = $(".add a");
 
             resultTotal.text(data.list.length + " companies");
             preloader.removeClass("preloader");
@@ -34,10 +40,10 @@ $(document).ready(function() {
             form.css({"opacity": "1", "transition": "opacity 3s linear"});
             diagram.css({"opacity": "1", "transition": "opacity 3s linear"});
             newsCompanies.css({"opacity": "1", "transition": "opacity 3s linear"});
-            addTagA.css({"opacity": "1", "transition": "opacity 3s linear"});
+            add.css({"opacity": "1", "transition": "opacity 3s linear"});
 
             var ul = document.createElement('ul');
-            resultCompanies.appendChild(ul);
+            resultCompanies.append(ul);
 
             for (var i = 0; i < data.list.length; i++) {
                 addLi(i);
@@ -106,24 +112,20 @@ $(document).ready(function() {
     //------------------------click companies-----------------------------
             $("ul li a").click(function () {
                 var radio = $('input[name=sort]:checked').val();
-                var companyName = this.innerHTML;
+                var attrA = this.getAttribute('data');
                 var str = " ";
                 var helpArr = [];
                 companyPartners.text(function () {
-                    for (var i = 0; i < data.list.length; i++) {
-                        if (data.list[i].name === companyName) {
-                            helpArr = data.list[i].partners.sort(function (a, b) {
-                                return a.value - b.value;
-                            })
-                            if (radio === "growth") {
-                                helpArr.reverse();
-                            }
-                            for (var j = 0; j < helpArr.length; j++) {
-                                str += helpArr[j].name + ": " + helpArr[j].value + "%; ";
-                            }
-                            return str;
+                    helpArr = data.list[parseInt(attrA)].partners.sort(function (a, b) {
+                        return a.value - b.value;
+                        })
+                    if (radio === "waning") {
+                        helpArr.reverse();
                         }
+                        for (var j = 0; j < helpArr.length; j++) {
+                        str += helpArr[j].name + ": " + helpArr[j].value + "%; ";
                     }
+                    return str;
                 })
             });
 
@@ -138,12 +140,7 @@ $(document).ready(function() {
             }
 
             var ulNews = document.createElement('ul');
-            newsCompanies.appendChild(ulNews);
-            var link = document.createElement('a');
-            $(".add").appendChild(link);
-            link.innerHTML = dataNews.list[0].link;
-            link.setAttribute("href", "https://codeit.us/");
-            link.setAttribute("alt", "photo");
+            newsCompanies.append(ulNews);
 
             for (var i = 0; i < dataNews.list.length; i++) {
                 addLiNews(i);
@@ -157,18 +154,18 @@ $(document).ready(function() {
                 var divDate = document.createElement('span');
                 var pDesc = document.createElement('p');
                 var parent = document.body.getElementsByTagName('ul')[1];
-                parent.appendChild(li);
+                parent.append(li);
 
-                li.appendChild(a);
-                li.appendChild(img);
-                li.appendChild(divAuthor);
-                li.appendChild(divDate);
-                li.appendChild(pDesc);
-                a.innerHTML = "Title " + (i + 1);
-                img.src = dataNews.list[i].img;
-                divAuthor.innerHTML = dataNews.list[i].author;
-                divDate.innerHTML = timeConverter(dataNews.list[i].date);
-                pDesc.innerHTML = dataNews.list[i].description;
+                li.append(a);
+                li.append(img);
+                li.append(divAuthor);
+                li.append(divDate);
+                li.append(pDesc);
+                a.innerHTML = "Title " + (num + 1);
+                img.src = dataNews.list[num].img;
+                divAuthor.innerHTML = dataNews.list[num].author;
+                divDate.innerHTML = timeConverter(dataNews.list[num].date);
+                pDesc.innerHTML = dataNews.list[num].description;
             }
         }
     }, 2000);

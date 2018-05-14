@@ -103,7 +103,7 @@ body {
     margin: 30px auto;
     font-size: 25px;
     font-weight: 600;
-    color: yellow;
+    color: $yel;
     opacity: 0;
 }
 
@@ -116,7 +116,7 @@ body {
         padding-left: 20px;
         cursor: pointer;
         a {
-          color: yellow;
+          color: $yel;
           width: 100%;
         }
         a:hover {
@@ -137,7 +137,7 @@ body {
 .company-partners {
   text-align: center;
   margin-top: 30px;
-  color: yellow;
+  color: $yel;
   overflow: auto;
   opacity: 0;
 }
@@ -151,7 +151,7 @@ body {
       a {
         display: block;
         text-align: right;
-        color: yellow;
+        color: $yel;
         cursor: pointer;
       }
       img {
@@ -163,7 +163,7 @@ body {
       }
       span {
         display: block;
-        color: yellow;
+        color: $yel;
         font-size: 10px;
 
       }
@@ -184,7 +184,7 @@ body {
     display: block;
     margin-top: 30px;
     font-size: 20px;
-    color: yellow;
+    color: $yel;
     cursor: pointer;
     text-decoration: none;
     opacity: 0;
